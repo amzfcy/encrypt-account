@@ -11,8 +11,12 @@ const fs = require('fs');
  * 例子：web3.eth.accounts.encrypt('apple purple xxx', '123456');
 */
 
-const keyStoreJson = web3.eth.accounts.encrypt(privateKey, password);
+const keyStoreJson = web3.eth.accounts.encrypt('privateKey', 'password');
 
-fs.writeFile('./keystore.json', keyStoreJson, err => {
-  console.error('keystore写入发生错误: ', err);
+fs.writeFile('./keystore.json', JSON.stringify(keyStoreJson), err => {
+  if (err) {
+    console.error('keystore写入发生错误: ', err);
+  } else {
+    console.log('keystore写入成功！');
+  }
 });
